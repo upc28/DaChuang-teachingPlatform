@@ -40,7 +40,7 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
-  <widget class="QTabWidget" name="tabWidget">
+  <widget class="QTabWidget" name="TabWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -54,13 +54,13 @@
 QTabBar::tab{height:35}</string>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>1</number>
    </property>
-   <widget class="QWidget" name="home">
+   <widget class="QWidget" name="home_tab">
     <attribute name="title">
      <string notr="true">Home</string>
     </attribute>
-    <widget class="QTextBrowser" name="textBrowser">
+    <widget class="QTextBrowser" name="logBro">
      <property name="geometry">
       <rect>
        <x>370</x>
@@ -70,7 +70,7 @@ QTabBar::tab{height:35}</string>
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_3">
+    <widget class="QPushButton" name="exitBtn">
      <property name="geometry">
       <rect>
        <x>110</x>
@@ -95,7 +95,7 @@ QTabBar::tab{height:35}</string>
      <property name="title">
       <string>Login</string>
      </property>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="login_loginBtn">
       <property name="geometry">
        <rect>
         <x>100</x>
@@ -108,7 +108,7 @@ QTabBar::tab{height:35}</string>
        <string>登陆</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="login_account">
       <property name="geometry">
        <rect>
         <x>79</x>
@@ -155,7 +155,7 @@ QTabBar::tab{height:35}</string>
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_2">
+     <widget class="QLineEdit" name="login_name">
       <property name="geometry">
        <rect>
         <x>79</x>
@@ -215,7 +215,7 @@ QTabBar::tab{height:35}</string>
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
       </property>
      </widget>
-     <widget class="QLabel" name="label_5">
+     <widget class="QLabel" name="status_numOnline">
       <property name="geometry">
        <rect>
         <x>140</x>
@@ -228,7 +228,7 @@ QTabBar::tab{height:35}</string>
        <string>TextLabel</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_6">
+     <widget class="QLabel" name="status_serverStatus">
       <property name="geometry">
        <rect>
         <x>140</x>
@@ -243,17 +243,56 @@ QTabBar::tab{height:35}</string>
      </widget>
     </widget>
    </widget>
-   <widget class="QWidget" name="tab_2">
+   <widget class="QWidget" name="student_tab">
     <attribute name="title">
      <string>Student</string>
     </attribute>
-    <widget class="QTreeWidget" name="treeWidget">
+    <widget class="QPushButton" name="groupManage_btn">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>311</width>
-       <height>421</height>
+       <x>340</x>
+       <y>20</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>分组管理</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="publishTask_btn">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>110</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>发布任务</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="publishAnnounce_btn">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>200</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>发布公告</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="student_TableWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>291</width>
+       <height>411</height>
       </rect>
      </property>
      <column>
@@ -272,51 +311,12 @@ QTabBar::tab{height:35}</string>
       </property>
      </column>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
-     <property name="geometry">
-      <rect>
-       <x>340</x>
-       <y>20</y>
-       <width>171</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>分组管理</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_4">
-     <property name="geometry">
-      <rect>
-       <x>340</x>
-       <y>110</y>
-       <width>171</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>发布任务</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_5">
-     <property name="geometry">
-      <rect>
-       <x>340</x>
-       <y>210</y>
-       <width>171</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>发布公告</string>
-     </property>
-    </widget>
    </widget>
-   <widget class="QWidget" name="tab_4">
+   <widget class="QWidget" name="manageSubject_tab">
     <attribute name="title">
-     <string>mannageSubject</string>
+     <string>manageSubject</string>
     </attribute>
-    <widget class="QTreeWidget" name="treeWidget_2">
+    <widget class="QTreeWidget" name="subject_treeWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -367,7 +367,7 @@ QTabBar::tab{height:35}</string>
       </property>
      </item>
     </widget>
-    <widget class="QTableWidget" name="tableWidget">
+    <widget class="QTableWidget" name="testCase_tableWidget">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -407,7 +407,7 @@ QTabBar::tab{height:35}</string>
       </property>
      </column>
     </widget>
-    <widget class="QPushButton" name="pushButton_6">
+    <widget class="QPushButton" name="subjectIntroduec_btn">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -420,7 +420,7 @@ QTabBar::tab{height:35}</string>
       <string>题目简介</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_7">
+    <widget class="QPushButton" name="addSubject_btn">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -433,7 +433,7 @@ QTabBar::tab{height:35}</string>
       <string>添加题目</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_8">
+    <widget class="QPushButton" name="deleteCases_btn">
      <property name="geometry">
       <rect>
        <x>660</x>
@@ -446,7 +446,7 @@ QTabBar::tab{height:35}</string>
       <string>删除用例</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_9">
+    <widget class="QPushButton" name="addCases_btn">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -459,8 +459,21 @@ QTabBar::tab{height:35}</string>
       <string>添加用例</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="deleteSubject_btn">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>20</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>删除题目</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QWidget" name="tab">
+   <widget class="QWidget" name="status_tab">
     <attribute name="title">
      <string>status</string>
     </attribute>
@@ -508,7 +521,7 @@ QTabBar::tab{height:35}</string>
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBox">
+     <widget class="QComboBox" name="title_chapterComboBox">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -518,7 +531,7 @@ QTabBar::tab{height:35}</string>
        </rect>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBox_2">
+     <widget class="QComboBox" name="title_subjectComboBox">
       <property name="geometry">
        <rect>
         <x>300</x>
@@ -528,7 +541,7 @@ QTabBar::tab{height:35}</string>
        </rect>
       </property>
      </widget>
-     <widget class="QRadioButton" name="radioButton">
+     <widget class="QRadioButton" name="title_rBtn">
       <property name="geometry">
        <rect>
         <x>570</x>
@@ -573,7 +586,7 @@ QTabBar::tab{height:35}</string>
        <string>日期</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBox_3">
+     <widget class="QComboBox" name="task_dateComboBox">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -583,7 +596,7 @@ QTabBar::tab{height:35}</string>
        </rect>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBox_4">
+     <widget class="QComboBox" name="task_subjectComboBox">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -606,7 +619,7 @@ QTabBar::tab{height:35}</string>
        <string>题目</string>
       </property>
      </widget>
-     <widget class="QRadioButton" name="radioButton_3">
+     <widget class="QRadioButton" name="task_rBtn">
       <property name="geometry">
        <rect>
         <x>150</x>
@@ -657,7 +670,7 @@ QTabBar::tab{height:35}</string>
      <property name="title">
       <string>日期</string>
      </property>
-     <widget class="QPushButton" name="pushButton_10">
+     <widget class="QPushButton" name="date_chooseBtn">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -670,7 +683,7 @@ QTabBar::tab{height:35}</string>
        <string>choose</string>
       </property>
      </widget>
-     <widget class="QRadioButton" name="radioButton_2">
+     <widget class="QRadioButton" name="date_rBtn">
       <property name="geometry">
        <rect>
         <x>150</x>
@@ -690,7 +703,7 @@ QTabBar::tab{height:35}</string>
       </property>
      </widget>
     </widget>
-    <widget class="QTableWidget" name="tableWidget_2">
+    <widget class="QTableWidget" name="display_tableWidget">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -700,7 +713,7 @@ QTabBar::tab{height:35}</string>
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_11">
+    <widget class="QPushButton" name="refresh_btn">
      <property name="geometry">
       <rect>
        <x>640</x>
