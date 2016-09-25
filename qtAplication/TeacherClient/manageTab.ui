@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ManageTab</class>
+ <widget class="QWidget" name="ManageTab">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>831</width>
+    <height>446</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="deleteCases_btn">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>370</y>
+     <width>141</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>删除用例</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="addSubject_btn">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>370</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>添加题目</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="deleteSubject_btn">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>20</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>删除题目</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="subjectIntroduec_btn">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>20</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>题目简介</string>
+   </property>
+  </widget>
+  <widget class="QTreeWidget" name="subject_treeWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>171</width>
+     <height>341</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
+   <column>
+    <property name="text">
+     <string>题目列表</string>
+    </property>
+   </column>
+   <item>
+    <property name="text">
+     <string>第一章</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>第二章</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>第三章</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>第四章</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>第五章</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>第六章</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QTableWidget" name="testCase_tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>70</y>
+     <width>591</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <attribute name="horizontalHeaderCascadingSectionResizes">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderDefaultSectionSize">
+    <number>120</number>
+   </attribute>
+   <attribute name="verticalHeaderDefaultSectionSize">
+    <number>30</number>
+   </attribute>
+   <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="verticalHeaderStretchLastSection">
+    <bool>false</bool>
+   </attribute>
+   <column>
+    <property name="text">
+     <string>编号</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>新建列</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>期待输出</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="addCases_btn">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>370</y>
+     <width>141</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>添加用例</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -13,8 +13,20 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        widget.cpp
+        widget.cpp \
+    homeTab.cpp \
+    studentTab.cpp \
+    manageTab.cpp \
+    statusTab.cpp
 
-HEADERS  += widget.h
+HEADERS  += widget.h \
+    homeTab.h \
+    studentTab.h \
+    manageTab.h \
+    statusTab.h
 
-FORMS    += widget.ui
+FORMS    += widget.ui \
+    homeTab.ui \
+    studentTab.ui \
+    manageTab.ui \
+    statusTab.ui

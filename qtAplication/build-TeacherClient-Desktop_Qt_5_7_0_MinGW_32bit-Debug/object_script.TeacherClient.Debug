@@ -1,0 +1,13 @@
+INPUT(
+./debug\main.o
+./debug\widget.o
+./debug\homeTab.o
+./debug\studentTab.o
+./debug\manageTab.o
+./debug\statusTab.o
+./debug\moc_widget.o
+./debug\moc_homeTab.o
+./debug\moc_studentTab.o
+./debug\moc_manageTab.o
+./debug\moc_statusTab.o
+);

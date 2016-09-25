@@ -1,0 +1,13 @@
+INPUT(
+./release\main.o
+./release\widget.o
+./release\homeTab.o
+./release\studentTab.o
+./release\manageTab.o
+./release\statusTab.o
+./release\moc_widget.o
+./release\moc_homeTab.o
+./release\moc_studentTab.o
+./release\moc_manageTab.o
+./release\moc_statusTab.o
+);

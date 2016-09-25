@@ -3,6 +3,11 @@
 
 #include <QWidget>
 
+#include "homeTab.h"
+#include "studentTab.h"
+#include "manageTab.h"
+#include "statusTab.h"
+
 namespace Ui {
 class Widget;
 }
@@ -18,6 +23,11 @@ public:
 
 private:
     Ui::Widget *ui;
+    HomeTab *homeTab;
+    StudentTab *studentTab;
+    ManageTab *manageTab;
+    StatusTab *statusTab;
+
 };
 
 #endif // WIDGET_H

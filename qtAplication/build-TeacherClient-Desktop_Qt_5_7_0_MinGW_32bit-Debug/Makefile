@@ -178,6 +178,7 @@ Makefile: ../TeacherClient/TeacherClient.pro H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspec
 		H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/win32/qt_config.prf \
 		H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/win32-g++/qmake.conf \
 		H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/exclusive_builds.prf \
 		H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/default_pre.prf \
 		H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/win32/default_pre.prf \
@@ -324,6 +325,7 @@ H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/qt_config.prf:
 H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/win32/qt_config.prf:
 H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/win32-g++/qmake.conf:
 H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/spec_post.prf:
+.qmake.stash:
 H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/exclusive_builds.prf:
 H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/default_pre.prf:
 H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/win32/default_pre.prf:
