@@ -76,6 +76,11 @@
      <string>分组</string>
     </property>
    </column>
+   <column>
+    <property name="text">
+     <string>状态</string>
+    </property>
+   </column>
   </widget>
  </widget>
  <resources/>
