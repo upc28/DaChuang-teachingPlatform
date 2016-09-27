@@ -47,9 +47,9 @@ int main()
     //daemon(0,0);
     MYSQL mysql;
     int field_num,field_count;
-    const char* db = "zb_source";
+    const char* db = "source";
     mysql_init(&mysql);
-    if(mysql_real_connect(&mysql,"localhost","root","1996",NULL,0,NULL,0)==NULL)
+    if(mysql_real_connect(&mysql,"172.24.11.22","upc28","1996",NULL,0,NULL,0)==NULL)
     {
       printf("mysql connect errer! %d: %s\n",mysql_errno(&mysql),mysql_error(&mysql));
       exit(1);
@@ -63,7 +63,7 @@ int main()
     MYSQL_RES* res;
     MYSQL_ROW row;
     /****************************/
-    int port = 10099;
+    int port = 20611;
     struct sockaddr_in sin;
     struct sockaddr_in csocket;
     socklen_t len;
@@ -87,7 +87,10 @@ int main()
             printf("fork success\n");
             char buf[BUFSIZE];
             char query[QUERYSIZE];
-            read(accept_fd,buf,BUFSIZE);
+            while(1){
+            ssize_t size = 0;
+            for(size = 0;size == 0 ;size = read(accept_fd,buf,2));
+
 	          printf("receive : %s\n",buf );
             char buf1[BUFSIZE],buf2[BUFSIZE],buf3[BUFSIZE];
             switch (buf[0]) {
@@ -187,7 +190,7 @@ int main()
                 break;
               case 'i':  //返回章节题目
                 read(accept_fd,buf1,BUFSIZE);
-                sprintf(query,"select id,title from subject where knowledge_id = %s",buf1);
+                sprintf(query,"select ID,TITLE from subject where CHAPTERID = %s",buf1);
                 printf("id = %s\n",buf1 );
                 if(mysql_real_query(&mysql,query,strlen(query))!=0) printf("quer error\n");
                 res = mysql_store_result(&mysql);
@@ -228,7 +231,7 @@ int main()
                 mysql_free_result(res);
                 break;
               case 'n': //返回章节标题
-                sprintf(query,"select name,id from knowledge");
+                sprintf(query,"select TITLE,ID from chapter");
                 if(mysql_real_query(&mysql,query,strlen(query))!=0) printf("quer error\n");
                 res = mysql_store_result(&mysql);
                 if(res==NULL) printf("use result error\n");
@@ -244,8 +247,15 @@ int main()
                 }
                 mysql_free_result(res);
                 break;
-              default:;
-            }
+              case 'e':
+                close(accept_fd);
+                close(server_fd);
+                exit(0);
+              default:
+                close(accept_fd);
+                close(server_fd);
+                exit(0);
+            }}
              close(accept_fd);
              close(server_fd);
             exit(0);
