@@ -2,6 +2,7 @@
 #define STATUSTAB_H
 
 #include <QWidget>
+#include "socket.h"
 
 namespace Ui {
 class StatusTab;

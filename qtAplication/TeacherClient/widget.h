@@ -7,6 +7,7 @@
 #include "studentTab.h"
 #include "manageTab.h"
 #include "statusTab.h"
+#include "socket.h"
 
 namespace Ui {
 class Widget;

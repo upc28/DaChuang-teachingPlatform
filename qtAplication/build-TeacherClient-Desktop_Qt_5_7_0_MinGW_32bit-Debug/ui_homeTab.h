@@ -27,18 +27,18 @@ class Ui_HomeTab
 {
 public:
     QTextBrowser *logBrowser;
-    QPushButton *exitBtn_2;
+    QPushButton *exitBtn;
     QGroupBox *groupBox_6;
-    QPushButton *login_loginBtn_2;
-    QLineEdit *login_account_2;
+    QPushButton *login_loginBtn;
+    QLineEdit *login_account;
     QLabel *label_5;
     QLabel *label_6;
-    QLineEdit *login_name_2;
+    QLineEdit *login_name;
     QGroupBox *groupBox_7;
     QLabel *label_7;
     QLabel *label_12;
-    QLabel *status_numOnline_2;
-    QLabel *status_serverStatus_2;
+    QLabel *status_numOnline;
+    QLabel *status_serverStatus;
 
     void setupUi(QWidget *HomeTab)
     {
@@ -48,21 +48,21 @@ public:
         logBrowser = new QTextBrowser(HomeTab);
         logBrowser->setObjectName(QStringLiteral("logBrowser"));
         logBrowser->setGeometry(QRect(390, 230, 411, 171));
-        exitBtn_2 = new QPushButton(HomeTab);
-        exitBtn_2->setObjectName(QStringLiteral("exitBtn_2"));
-        exitBtn_2->setGeometry(QRect(130, 310, 120, 30));
+        exitBtn = new QPushButton(HomeTab);
+        exitBtn->setObjectName(QStringLiteral("exitBtn"));
+        exitBtn->setGeometry(QRect(130, 310, 120, 30));
         groupBox_6 = new QGroupBox(HomeTab);
         groupBox_6->setObjectName(QStringLiteral("groupBox_6"));
         groupBox_6->setGeometry(QRect(30, 30, 311, 211));
-        login_loginBtn_2 = new QPushButton(groupBox_6);
-        login_loginBtn_2->setObjectName(QStringLiteral("login_loginBtn_2"));
-        login_loginBtn_2->setGeometry(QRect(100, 170, 120, 30));
-        login_account_2 = new QLineEdit(groupBox_6);
-        login_account_2->setObjectName(QStringLiteral("login_account_2"));
-        login_account_2->setGeometry(QRect(79, 40, 171, 31));
+        login_loginBtn = new QPushButton(groupBox_6);
+        login_loginBtn->setObjectName(QStringLiteral("login_loginBtn"));
+        login_loginBtn->setGeometry(QRect(100, 170, 120, 30));
+        login_account = new QLineEdit(groupBox_6);
+        login_account->setObjectName(QStringLiteral("login_account"));
+        login_account->setGeometry(QRect(79, 40, 171, 31));
         QFont font;
         font.setPointSize(11);
-        login_account_2->setFont(font);
+        login_account->setFont(font);
         label_5 = new QLabel(groupBox_6);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setGeometry(QRect(20, 50, 54, 12));
@@ -71,10 +71,10 @@ public:
         label_6->setObjectName(QStringLiteral("label_6"));
         label_6->setGeometry(QRect(20, 120, 54, 12));
         label_6->setAlignment(Qt::AlignCenter);
-        login_name_2 = new QLineEdit(groupBox_6);
-        login_name_2->setObjectName(QStringLiteral("login_name_2"));
-        login_name_2->setGeometry(QRect(79, 110, 171, 31));
-        login_name_2->setFont(font);
+        login_name = new QLineEdit(groupBox_6);
+        login_name->setObjectName(QStringLiteral("login_name"));
+        login_name->setGeometry(QRect(79, 110, 171, 31));
+        login_name->setFont(font);
         groupBox_7 = new QGroupBox(HomeTab);
         groupBox_7->setObjectName(QStringLiteral("groupBox_7"));
         groupBox_7->setGeometry(QRect(390, 30, 271, 141));
@@ -86,12 +86,12 @@ public:
         label_12->setObjectName(QStringLiteral("label_12"));
         label_12->setGeometry(QRect(30, 40, 80, 20));
         label_12->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
-        status_numOnline_2 = new QLabel(groupBox_7);
-        status_numOnline_2->setObjectName(QStringLiteral("status_numOnline_2"));
-        status_numOnline_2->setGeometry(QRect(140, 40, 80, 20));
-        status_serverStatus_2 = new QLabel(groupBox_7);
-        status_serverStatus_2->setObjectName(QStringLiteral("status_serverStatus_2"));
-        status_serverStatus_2->setGeometry(QRect(140, 80, 80, 20));
+        status_numOnline = new QLabel(groupBox_7);
+        status_numOnline->setObjectName(QStringLiteral("status_numOnline"));
+        status_numOnline->setGeometry(QRect(140, 40, 80, 20));
+        status_serverStatus = new QLabel(groupBox_7);
+        status_serverStatus->setObjectName(QStringLiteral("status_serverStatus"));
+        status_serverStatus->setGeometry(QRect(140, 80, 80, 20));
 
         retranslateUi(HomeTab);
 
@@ -101,16 +101,16 @@ public:
     void retranslateUi(QWidget *HomeTab)
     {
         HomeTab->setWindowTitle(QApplication::translate("HomeTab", "Form", 0));
-        exitBtn_2->setText(QApplication::translate("HomeTab", "\351\200\200\345\207\272", 0));
+        exitBtn->setText(QApplication::translate("HomeTab", "\351\200\200\345\207\272", 0));
         groupBox_6->setTitle(QApplication::translate("HomeTab", "Login", 0));
-        login_loginBtn_2->setText(QApplication::translate("HomeTab", "\347\231\273\351\231\206", 0));
+        login_loginBtn->setText(QApplication::translate("HomeTab", "\347\231\273\351\231\206", 0));
         label_5->setText(QApplication::translate("HomeTab", "\350\264\246\345\217\267", 0));
         label_6->setText(QApplication::translate("HomeTab", "\345\247\223\345\220\215", 0));
         groupBox_7->setTitle(QApplication::translate("HomeTab", "Status", 0));
         label_7->setText(QApplication::translate("HomeTab", "\346\234\215\345\212\241\345\231\250\347\212\266\346\200\201", 0));
         label_12->setText(QApplication::translate("HomeTab", "\345\234\250\347\272\277\344\272\272\346\225\260", 0));
-        status_numOnline_2->setText(QApplication::translate("HomeTab", "TextLabel", 0));
-        status_serverStatus_2->setText(QApplication::translate("HomeTab", "TextLabel", 0));
+        status_numOnline->setText(QApplication::translate("HomeTab", "TextLabel", 0));
+        status_serverStatus->setText(QApplication::translate("HomeTab", "waiting", 0));
     } // retranslateUi
 
 };

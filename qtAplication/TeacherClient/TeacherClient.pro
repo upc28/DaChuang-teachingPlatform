@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,13 +18,17 @@ SOURCES += main.cpp\
     homeTab.cpp \
     studentTab.cpp \
     manageTab.cpp \
-    statusTab.cpp
+    statusTab.cpp \
+    socket.cpp \
+    myxml.cpp
 
 HEADERS  += widget.h \
     homeTab.h \
     studentTab.h \
     manageTab.h \
-    statusTab.h
+    statusTab.h \
+    socket.h \
+    myxml.h
 
 FORMS    += widget.ui \
     homeTab.ui \

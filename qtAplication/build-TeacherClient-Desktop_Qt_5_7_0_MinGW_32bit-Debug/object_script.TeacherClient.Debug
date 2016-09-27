@@ -5,9 +5,13 @@ INPUT(
 ./debug\studentTab.o
 ./debug\manageTab.o
 ./debug\statusTab.o
+./debug\socket.o
+./debug\myxml.o
 ./debug\moc_widget.o
 ./debug\moc_homeTab.o
 ./debug\moc_studentTab.o
 ./debug\moc_manageTab.o
 ./debug\moc_statusTab.o
+./debug\moc_socket.o
+./debug\moc_myxml.o
 );

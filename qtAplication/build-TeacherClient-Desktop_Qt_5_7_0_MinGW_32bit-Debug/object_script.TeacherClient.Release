@@ -5,9 +5,13 @@ INPUT(
 ./release\studentTab.o
 ./release\manageTab.o
 ./release\statusTab.o
+./release\socket.o
+./release\myxml.o
 ./release\moc_widget.o
 ./release\moc_homeTab.o
 ./release\moc_studentTab.o
 ./release\moc_manageTab.o
 ./release\moc_statusTab.o
+./release\moc_socket.o
+./release\moc_myxml.o
 );

@@ -43,14 +43,16 @@ public:
         groupManage_btn->setObjectName(QStringLiteral("groupManage_btn"));
         groupManage_btn->setGeometry(QRect(340, 20, 171, 41));
         student_TableWidget = new QTableWidget(StudentTab);
-        if (student_TableWidget->columnCount() < 3)
-            student_TableWidget->setColumnCount(3);
+        if (student_TableWidget->columnCount() < 4)
+            student_TableWidget->setColumnCount(4);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         student_TableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
         student_TableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
         student_TableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        student_TableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem3);
         student_TableWidget->setObjectName(QStringLiteral("student_TableWidget"));
         student_TableWidget->setGeometry(QRect(20, 20, 291, 401));
 
@@ -71,6 +73,8 @@ public:
         ___qtablewidgetitem1->setText(QApplication::translate("StudentTab", "\345\255\246\345\217\267", 0));
         QTableWidgetItem *___qtablewidgetitem2 = student_TableWidget->horizontalHeaderItem(2);
         ___qtablewidgetitem2->setText(QApplication::translate("StudentTab", "\345\210\206\347\273\204", 0));
+        QTableWidgetItem *___qtablewidgetitem3 = student_TableWidget->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("StudentTab", "\347\212\266\346\200\201", 0));
     } // retranslateUi
 
 };
