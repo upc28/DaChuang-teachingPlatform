@@ -23,7 +23,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="exitBtn_2">
+  <widget class="QPushButton" name="exitBtn">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -48,7 +48,7 @@
    <property name="title">
     <string>Login</string>
    </property>
-   <widget class="QPushButton" name="login_loginBtn_2">
+   <widget class="QPushButton" name="login_loginBtn">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -61,7 +61,7 @@
      <string>登陆</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="login_account_2">
+   <widget class="QLineEdit" name="login_account">
     <property name="geometry">
      <rect>
       <x>79</x>
@@ -108,7 +108,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLineEdit" name="login_name_2">
+   <widget class="QLineEdit" name="login_name">
     <property name="geometry">
      <rect>
       <x>79</x>
@@ -168,7 +168,7 @@
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="status_numOnline_2">
+   <widget class="QLabel" name="status_numOnline">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -181,7 +181,7 @@
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QLabel" name="status_serverStatus_2">
+   <widget class="QLabel" name="status_serverStatus">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -191,7 +191,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string>waiting</string>
     </property>
    </widget>
   </widget>
