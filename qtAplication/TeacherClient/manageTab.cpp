@@ -14,25 +14,23 @@ ManageTab::ManageTab(Socket *s) :
 void ManageTab::RefreshTree()
 {
     QTreeWidget *treeWidget = ui->subject_treeWidget;
+    treeWidget->clear();
     QStringList columItemList;
 
-    QTreeWidgetItem* child;
-    QString a = "key",b ="value";
-    columItemList<<a<<b;
-    child = new QTreeWidgetItem(columItemList);
-    QStringList columItemList2;
-    columItemList.clear();
-    QTreeWidgetItem* child2;
-    QString a2 = "key2",b2 ="value2";
-    columItemList<<a2<<b2;
-    child2 = new QTreeWidgetItem(columItemList);
-    treeWidget->addTopLevelItem(child);
-    child->addChild(child2);
     /************************/
-    Subject* tsubject;
-    for(int i=0;i < serverSocket->subject_vector->count();i++)
+    for(int i=0;i < serverSocket->subject_list->count();i++)
     {
-
+        columItemList.clear();
+        columItemList<< serverSocket->subject_list->at(i)->title << serverSocket->subject_list->at(i)->num;
+        QTreeWidgetItem* child= new QTreeWidgetItem(columItemList);
+        treeWidget->addTopLevelItem(child);
+        QList<Question*> *tlist = serverSocket->subject_list->at(i)->list;
+        for(int j = 0;j<tlist->count();j++)
+        {
+            columItemList.clear();
+            columItemList<<tlist->at(j)->title<<tlist->at(j)->num;
+            child->addChild(new QTreeWidgetItem(columItemList));
+        }
     }
 
 }

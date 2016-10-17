@@ -13,11 +13,18 @@ class StatusTab : public QWidget
     Q_OBJECT
 
 public:
-    explicit StatusTab(QWidget *parent = 0);
+    explicit StatusTab(Socket *s);
     ~StatusTab();
+
+private slots:
+    void refreshTitleBox();
+
+    void on_title_chapterComboBox_currentIndexChanged(int index);
 
 private:
     Ui::StatusTab *ui;
+    Socket* serverSocket;
+    void refreshTitleBox_subject(int i);
 };
 
 #endif // STATUSTAB_H

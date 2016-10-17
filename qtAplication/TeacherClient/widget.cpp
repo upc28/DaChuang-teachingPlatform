@@ -10,7 +10,7 @@ Widget::Widget(QWidget *parent) :
     homeTab = new HomeTab(ss);
     studentTab = new StudentTab();
     manageTab = new ManageTab(ss);
-    statusTab = new StatusTab();
+    statusTab = new StatusTab(ss);
     ui->TabWidget->addTab(homeTab,"Home");
     ui->TabWidget->addTab(studentTab,"Student");
     ui->TabWidget->addTab(manageTab,"Manage");

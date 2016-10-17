@@ -7,19 +7,20 @@
 #include "QtNetwork/QUdpSocket"
 
 struct Question{
-    QString title;
-    qint16 num;
-    Question(QString a,qint16 b)
+    QString title,num;
+
+    Question(QString a,QString b)
     {
         title = a; num = b;
     }
 };
 
 struct Subject{
-    QString title;
-    qint16 num;
-    QVector<Question*> *vector;
-    Subject(QString a,qint16 b){vector = new QVector<Question*>();title = a; num = b;}
+    QString title, num;
+
+    QList<Question*> *list;
+
+    Subject(QString a,QString b){list = new QList<Question*>();title = a; num = b;}
 
 };
 
@@ -31,6 +32,7 @@ public:
     explicit Socket(QObject *parent = 0);
     bool login();
 
+    QList<Subject*> *subject_list;
 signals:
     void refreshSubjectFinish();
 
@@ -44,7 +46,7 @@ private:
     qint16 teacherport = 20711;
     qint16 serverport = 20611;
     QString serverAddress = "192.168.31.132";
-    QVector<Subject*> *subject_vector;
+
 };
 
 #endif // SOCKET_H
