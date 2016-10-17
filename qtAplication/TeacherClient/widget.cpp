@@ -9,7 +9,7 @@ Widget::Widget(QWidget *parent) :
     Socket *ss= new Socket();
     homeTab = new HomeTab(ss);
     studentTab = new StudentTab();
-    manageTab = new ManageTab();
+    manageTab = new ManageTab(ss);
     statusTab = new StatusTab();
     ui->TabWidget->addTab(homeTab,"Home");
     ui->TabWidget->addTab(studentTab,"Student");

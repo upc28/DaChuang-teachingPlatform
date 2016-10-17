@@ -80,41 +80,14 @@
    <property name="frameShadow">
     <enum>QFrame::Sunken</enum>
    </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
    <column>
     <property name="text">
      <string>题目列表</string>
     </property>
    </column>
-   <item>
-    <property name="text">
-     <string>第一章</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>第二章</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>第三章</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>第四章</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>第五章</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>第六章</string>
-    </property>
-   </item>
   </widget>
   <widget class="QTableWidget" name="testCase_tableWidget">
    <property name="geometry">

@@ -50,16 +50,11 @@ public:
         subjectIntroduec_btn->setObjectName(QStringLiteral("subjectIntroduec_btn"));
         subjectIntroduec_btn->setGeometry(QRect(210, 20, 111, 41));
         subject_treeWidget = new QTreeWidget(ManageTab);
-        new QTreeWidgetItem(subject_treeWidget);
-        new QTreeWidgetItem(subject_treeWidget);
-        new QTreeWidgetItem(subject_treeWidget);
-        new QTreeWidgetItem(subject_treeWidget);
-        new QTreeWidgetItem(subject_treeWidget);
-        new QTreeWidgetItem(subject_treeWidget);
         subject_treeWidget->setObjectName(QStringLiteral("subject_treeWidget"));
         subject_treeWidget->setGeometry(QRect(20, 20, 171, 341));
         subject_treeWidget->setFrameShape(QFrame::Box);
         subject_treeWidget->setFrameShadow(QFrame::Sunken);
+        subject_treeWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         testCase_tableWidget = new QTableWidget(ManageTab);
         if (testCase_tableWidget->columnCount() < 3)
             testCase_tableWidget->setColumnCount(3);
@@ -94,23 +89,6 @@ public:
         subjectIntroduec_btn->setText(QApplication::translate("ManageTab", "\351\242\230\347\233\256\347\256\200\344\273\213", 0));
         QTreeWidgetItem *___qtreewidgetitem = subject_treeWidget->headerItem();
         ___qtreewidgetitem->setText(0, QApplication::translate("ManageTab", "\351\242\230\347\233\256\345\210\227\350\241\250", 0));
-
-        const bool __sortingEnabled = subject_treeWidget->isSortingEnabled();
-        subject_treeWidget->setSortingEnabled(false);
-        QTreeWidgetItem *___qtreewidgetitem1 = subject_treeWidget->topLevelItem(0);
-        ___qtreewidgetitem1->setText(0, QApplication::translate("ManageTab", "\347\254\254\344\270\200\347\253\240", 0));
-        QTreeWidgetItem *___qtreewidgetitem2 = subject_treeWidget->topLevelItem(1);
-        ___qtreewidgetitem2->setText(0, QApplication::translate("ManageTab", "\347\254\254\344\272\214\347\253\240", 0));
-        QTreeWidgetItem *___qtreewidgetitem3 = subject_treeWidget->topLevelItem(2);
-        ___qtreewidgetitem3->setText(0, QApplication::translate("ManageTab", "\347\254\254\344\270\211\347\253\240", 0));
-        QTreeWidgetItem *___qtreewidgetitem4 = subject_treeWidget->topLevelItem(3);
-        ___qtreewidgetitem4->setText(0, QApplication::translate("ManageTab", "\347\254\254\345\233\233\347\253\240", 0));
-        QTreeWidgetItem *___qtreewidgetitem5 = subject_treeWidget->topLevelItem(4);
-        ___qtreewidgetitem5->setText(0, QApplication::translate("ManageTab", "\347\254\254\344\272\224\347\253\240", 0));
-        QTreeWidgetItem *___qtreewidgetitem6 = subject_treeWidget->topLevelItem(5);
-        ___qtreewidgetitem6->setText(0, QApplication::translate("ManageTab", "\347\254\254\345\205\255\347\253\240", 0));
-        subject_treeWidget->setSortingEnabled(__sortingEnabled);
-
         QTableWidgetItem *___qtablewidgetitem = testCase_tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("ManageTab", "\347\274\226\345\217\267", 0));
         QTableWidgetItem *___qtablewidgetitem1 = testCase_tableWidget->horizontalHeaderItem(1);

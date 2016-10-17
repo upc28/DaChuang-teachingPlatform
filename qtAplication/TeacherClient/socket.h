@@ -32,6 +32,7 @@ public:
     bool login();
 
 signals:
+    void refreshSubjectFinish();
 
 public slots:
     void reciveNewConnection();

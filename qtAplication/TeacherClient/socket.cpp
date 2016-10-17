@@ -54,7 +54,6 @@ void Socket::GetSubjectList()
             server_tcpsocket->read(buf2,1024);
             subject_vector->at(i)->vector->push_back(new Question(QString(buf1),QString(buf2).toInt()));
         }
-
-
     }
+    emit refreshSubjectFinish();
 }
