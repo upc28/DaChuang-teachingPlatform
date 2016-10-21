@@ -20,6 +20,7 @@
 #define SELECT_ID_QUERY "select id from history order by id desc limit 0,1"
 #define FLAGS O_RDWR | O_CREATE
 #define MODE S_IRWXU|S_IRGRP|S_IXGRP|S_IROTH|S_IXOTH
+#define DATAPATH "/mnt/hgfs/upc28/data"
 
 int receiveFile(int accept_fd,char* filename)
 {
@@ -49,7 +50,7 @@ int main()
     int field_num,field_count;
     const char* db = "source";
     mysql_init(&mysql);
-    if(mysql_real_connect(&mysql,"172.24.11.22","upc28","1996",NULL,0,NULL,0)==NULL)
+    if(mysql_real_connect(&mysql,"180.201.190.92","upc28","1996",NULL,0,NULL,0)==NULL)
     {
       printf("mysql connect errer! %d: %s\n",mysql_errno(&mysql),mysql_error(&mysql));
       exit(1);
@@ -89,11 +90,12 @@ int main()
             char query[QUERYSIZE];
             while(1){
             ssize_t size = 0;
-            for(size = 0;size == 0 ;size = read(accept_fd,buf,2));
+            char ff;
+            for(size = 0;size == 0 ;size = read(accept_fd,&ff,1));
 
 	          printf("receive : %s\n",buf );
             char buf1[BUFSIZE],buf2[BUFSIZE],buf3[BUFSIZE];
-            switch (buf[0]) {
+            switch (ff) {
               case 'c':   //提交编译程序
                 read(accept_fd,buf1,BUFSIZE);
                 printf("receive : %s\n",buf1 );
@@ -130,52 +132,52 @@ int main()
                 break;
 
               case 'a':  //上传题目
-                read(accept_fd,buf1,BUFSIZE); //title
-                printf("receive title : %s\n", buf1);
-                read(accept_fd,buf2,BUFSIZE); //knowledge_id
-                printf("receive knowledge_id : %s\n",buf2 );
-                sprintf(query,"insert into subject (title,knowledge_id) values(\'%s\',%s)",buf1,buf2);
+                //read(accept_fd,buf1,BUFSIZE); //chapter_id
+                for(size = 0;size == 0;size=read(accept_fd,buf1,BUFSIZE));
+                printf("receive chapter_id: %s\n", buf1);
+                //read(accept_fd,buf2,BUFSIZE); //title
+                for(size = 0;size == 0;size=read(accept_fd,buf2,BUFSIZE));
+                printf("receive title : %s\n",buf2 );
+                sprintf(query,"insert into subject (CHAPTERID,TITLE) values(%s,\'%s\')",buf1,buf2);
                 printf("%s\n",query );
                 mysql_real_query(&mysql,query,strlen(query));
                 sprintf(query,"select id from subject order by id desc limit 0,1");
                 mysql_real_query(&mysql,query,strlen(query));
                 res = mysql_store_result(&mysql);
-                row = mysql_fetch_row(res);
-                sprintf(buf3,"/upc_home/zm/zb/programData/%s/%s",buf2,row[0]);
-                sprintf(query,"update subject set directory_dir=\'%s\' where id = %s",buf3,row[0]);
+                row = mysql_fetch_row(res); //row[0]  id
+                sprintf(buf3,"%s/%s",DATAPATH,row[0]);
                 sprintf(buf1,"%s/case",buf3);
-                sprintf(buf2,"%s/usr",buf3);
-                mysql_real_query(&mysql,query,strlen(query));
-                printf("%s\n",query );
+                sprintf(buf2,"%s/user",buf3);
                 //mysql_free_result(res);
                 if(mkdir(buf3,S_IRUSR|S_IWUSR|S_IXUSR)==-1||mkdir(buf2,S_IRUSR|S_IWUSR|S_IXUSR)==-1||mkdir(buf1,S_IRUSR|S_IWUSR|S_IXUSR)==-1)
                 {
                   printf("mkdir error: %s\n",buf3 );
-                  write(accept_fd,"e",1);
+                  write(accept_fd,"e",BUFSIZE);
                 }
                 else {
-                  write(accept_fd,"r",1);
+                  write(accept_fd,"r",BUFSIZE);
                   char filename[255];
                   sprintf(filename,"%s/describe",buf3);
                   if(receiveFile(accept_fd,filename)==1)
                   {
-                    write(accept_fd,"r",1);
+                    write(accept_fd,"r",BUFSIZE);
                     printf("wirte describe success\n" );
                     sprintf(filename,"%s/preCode",buf3);
                     if(receiveFile(accept_fd,filename)==1)
                     {
-                      write(accept_fd,"r",1);
+                      write(accept_fd,"r",BUFSIZE);
                       printf("wirte preCode success\n" );
                       sprintf(filename,"%s/sufCode",buf3);
                       if(receiveFile(accept_fd,filename)==1)
                       {
                         printf("wirte sufCode success\n" );
+                        write(accept_fd,"r",BUFSIZE);
                       }
-
+                      else write(accept_fd,"e",BUFSIZE);
                     }
-                    else write(accept_fd,"e",1);
+                    else write(accept_fd,"e",BUFSIZE);
                   }
-                  else write(accept_fd,"e",1);
+                  else write(accept_fd,"e",BUFSIZE);
                 }
                 mysql_free_result(res);
                 break;
@@ -189,7 +191,9 @@ int main()
                 mysql_free_result(res);
                 break;
               case 'i':  //返回章节题目
-                read(accept_fd,buf1,BUFSIZE);
+
+                for(size = 0;size == 0;size=read(accept_fd,buf1,2))  ;
+
                 sprintf(query,"select ID,TITLE from subject where CHAPTERID = %s",buf1);
                 printf("id = %s\n",buf1 );
                 if(mysql_real_query(&mysql,query,strlen(query))!=0) printf("quer error\n");
@@ -244,12 +248,18 @@ int main()
                   row = mysql_fetch_row(res);
                   write(accept_fd,row[0],BUFSIZE);
                   write(accept_fd,row[1],BUFSIZE);
+                  printf("%s %s",row[0],row[1]);
                 }
                 mysql_free_result(res);
+                break;
+              case 'l':  //return subject Introduce and CaseList
+                read(accept_fd,buf1,BUFSIZE);
+
                 break;
               case 'e':
                 close(accept_fd);
                 close(server_fd);
+                printf("close connection\n" );
                 exit(0);
               default:
                 close(accept_fd);
