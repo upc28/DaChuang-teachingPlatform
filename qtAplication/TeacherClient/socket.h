@@ -24,6 +24,21 @@ struct Subject{
 
 };
 
+struct _case{
+    QString input,output;
+};
+
+struct Subject_Case{
+    QString introduce;
+    QList<_case> case_list;
+};
+
+struct AddSubject_s{
+    QString chapterid,title,introduce,preCode,sufCode;
+    AddSubject_s(QString a,QString b,QString c,QString d,QString e){
+        chapterid = a;title = b;introduce = c;preCode = d;sufCode = e;
+    }
+};
 
 class Socket : public QObject
 {
@@ -32,7 +47,10 @@ public:
     explicit Socket(QObject *parent = 0);
     bool login();
 
-    QList<Subject*> *subject_list;
+    QList<Subject*> *subject_list;      //保存章节题目名称信息
+    Subject_Case* subject_case;
+    void getSubjectCase(QString num);
+    bool addSubject(AddSubject_s* addSubject_s);
 signals:
     void refreshSubjectFinish();
 

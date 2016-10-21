@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     manageTab.cpp \
     statusTab.cpp \
     socket.cpp \
-    myxml.cpp
+    myxml.cpp \
+    addsubject.cpp
 
 HEADERS  += widget.h \
     homeTab.h \
@@ -28,10 +29,12 @@ HEADERS  += widget.h \
     manageTab.h \
     statusTab.h \
     socket.h \
-    myxml.h
+    myxml.h \
+    addsubject.h
 
 FORMS    += widget.ui \
     homeTab.ui \
     studentTab.ui \
     manageTab.ui \
-    statusTab.ui
+    statusTab.ui \
+    addsubject.ui

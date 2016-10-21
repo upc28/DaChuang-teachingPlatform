@@ -16,8 +16,6 @@ void ManageTab::RefreshTree()
     QTreeWidget *treeWidget = ui->subject_treeWidget;
     treeWidget->clear();
     QStringList columItemList;
-
-    /************************/
     for(int i=0;i < serverSocket->subject_list->count();i++)
     {
         columItemList.clear();
@@ -39,3 +37,28 @@ ManageTab::~ManageTab()
 {
     delete ui;
 }
+
+void ManageTab::on_subject_treeWidget_doubleClicked(const QModelIndex &index)
+{
+    qDebug()<<&index;
+}
+
+void ManageTab::on_addSubject_btn_clicked()
+{
+    addsubject = new AddSubject(serverSocket);
+    addsubject->show();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
