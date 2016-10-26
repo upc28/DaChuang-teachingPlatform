@@ -92,7 +92,7 @@ public:
         QTableWidgetItem *___qtablewidgetitem = testCase_tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("ManageTab", "\347\274\226\345\217\267", 0));
         QTableWidgetItem *___qtablewidgetitem1 = testCase_tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("ManageTab", "\346\226\260\345\273\272\345\210\227", 0));
+        ___qtablewidgetitem1->setText(QApplication::translate("ManageTab", "\350\276\223\345\205\245", 0));
         QTableWidgetItem *___qtablewidgetitem2 = testCase_tableWidget->horizontalHeaderItem(2);
         ___qtablewidgetitem2->setText(QApplication::translate("ManageTab", "\346\234\237\345\276\205\350\276\223\345\207\272", 0));
         addCases_btn->setText(QApplication::translate("ManageTab", "\346\267\273\345\212\240\347\224\250\344\276\213", 0));

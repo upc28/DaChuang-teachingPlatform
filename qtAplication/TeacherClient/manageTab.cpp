@@ -7,6 +7,7 @@ ManageTab::ManageTab(Socket *s) :
     ui(new Ui::ManageTab)
 {
     ui->setupUi(this);
+    currentTreeItem = new CurrentTreeItem();
     serverSocket = s;
     connect(serverSocket,SIGNAL(refreshSubjectFinish()),this,SLOT(RefreshTree()));
 }
@@ -26,7 +27,7 @@ void ManageTab::RefreshTree()
         for(int j = 0;j<tlist->count();j++)
         {
             columItemList.clear();
-            columItemList<<tlist->at(j)->title<<tlist->at(j)->num;
+            columItemList<<tlist->at(j)->title;//<<tlist->at(j)->num;
             child->addChild(new QTreeWidgetItem(columItemList));
         }
     }
@@ -40,7 +41,16 @@ ManageTab::~ManageTab()
 
 void ManageTab::on_subject_treeWidget_doubleClicked(const QModelIndex &index)
 {
-    qDebug()<<&index;
+    if(index.parent().row()==-1) return;
+    qDebug()<<index.parent().row();
+    qDebug()<<index.row();
+    currentTreeItem->parentRow = index.parent().row();
+    currentTreeItem->row = index.row();
+    CaseList *caselist = new CaseList();
+    serverSocket->getSubjectCase(serverSocket->subject_list->at(index.parent().row())->list->at(index.row())->num,caselist);
+    //qDebug()<<(serverSocket->subject_list->at(index.parent().row())->list->at(index.row())->num);
+
+
 }
 
 void ManageTab::on_addSubject_btn_clicked()
@@ -49,6 +59,24 @@ void ManageTab::on_addSubject_btn_clicked()
     addsubject->show();
 
 }
+
+
+void ManageTab::on_deleteSubject_btn_clicked()
+{
+
+}
+
+void ManageTab::on_addCases_btn_clicked()
+{
+    if(currentTreeItem->parentRow==-1&&currentTreeItem->row==-1)
+        return;
+    addsubjectcase = new AddSubjectCase(serverSocket,currentTreeItem);
+    addsubjectcase->show();
+}
+
+
+
+
 
 
 

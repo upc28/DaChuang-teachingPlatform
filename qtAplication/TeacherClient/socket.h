@@ -26,11 +26,30 @@ struct Subject{
 
 struct _case{
     QString input,output;
+    _case(QString a,QString b)
+    {
+        input = a;output = b;
+    }
+};
+
+struct CaseList{
+    QString introduce;
+    QList<_case*> *list;
+    CaseList(){
+        list = new QList<_case*>();
+    }
 };
 
 struct Subject_Case{
     QString introduce;
     QList<_case> case_list;
+};
+
+struct CurrentTreeItem{
+    int parentRow,row;
+    CurrentTreeItem(){
+        parentRow = -1;row = -1;
+    }
 };
 
 struct AddSubject_s{
@@ -49,8 +68,9 @@ public:
 
     QList<Subject*> *subject_list;      //保存章节题目名称信息
     Subject_Case* subject_case;
-    void getSubjectCase(QString num);
+    void getSubjectCase(QString num,CaseList* caselist);
     bool addSubject(AddSubject_s* addSubject_s);
+    bool addSubjectCase(CurrentTreeItem *currentTreeItem, QString input, QString output);
 signals:
     void refreshSubjectFinish();
 

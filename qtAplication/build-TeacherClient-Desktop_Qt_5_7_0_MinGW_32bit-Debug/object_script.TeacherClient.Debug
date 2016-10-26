@@ -8,6 +8,7 @@ INPUT(
 ./debug\socket.o
 ./debug\myxml.o
 ./debug\addsubject.o
+./debug\addsubjectcase.o
 ./debug\moc_widget.o
 ./debug\moc_homeTab.o
 ./debug\moc_studentTab.o
@@ -16,4 +17,5 @@ INPUT(
 ./debug\moc_socket.o
 ./debug\moc_myxml.o
 ./debug\moc_addsubject.o
+./debug\moc_addsubjectcase.o
 );

@@ -4,10 +4,13 @@
 #include <QWidget>
 #include "socket.h"
 #include "addsubject.h"
+#include "addsubjectcase.h"
 
 namespace Ui {
 class ManageTab;
 }
+
+
 
 class ManageTab : public QWidget
 {
@@ -24,10 +27,16 @@ private slots:
 
     void on_addSubject_btn_clicked();
 
+    void on_deleteSubject_btn_clicked();
+
+    void on_addCases_btn_clicked();
+
 private:
     Ui::ManageTab *ui;
     Socket* serverSocket;
     AddSubject* addsubject;
+    AddSubjectCase* addsubjectcase;
+    CurrentTreeItem *currentTreeItem;
 };
 
 #endif // MANAGETAB_H

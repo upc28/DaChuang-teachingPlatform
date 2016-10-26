@@ -36,7 +36,7 @@ void Socket::GetSubjectList()
         server_tcpsocket->read(buf1,1024);
         server_tcpsocket->waitForReadyRead(20);
         server_tcpsocket->read(buf2,1024);
-        qDebug()<<buf1<<" "<<buf2;
+        //qDebug()<<buf1<<" "<<buf2;
         subject_list->push_back(new Subject(QString(buf1),QString(buf2)));
 /*!!!这句不能删，否则list值为空=。=！！！*/  //qDebug()<<QString(buf1)<<" "<<QString(buf2);
         //subject_list->at(i).num =  QString(buf2);
@@ -49,21 +49,21 @@ void Socket::GetSubjectList()
         server_tcpsocket->write("i");
         server_tcpsocket->flush();
         //qDebug(QString::number(tlist->num,10).toStdString().data());
-        server_tcpsocket->write(QString::number(subject_list->at(i)->num.toInt(),10).toStdString().data());
-        qDebug()<<"send "<<QString::number(subject_list->at(i)->num.toInt(),10);
+        server_tcpsocket->write(QString::number(subject_list->at(i)->num.toInt(),10).toStdString().data(),1024);
+        //qDebug()<<"send "<<QString::number(subject_list->at(i)->num.toInt(),10);
         server_tcpsocket->flush();
         char buf1[1024],buf2[1024],buf[1024];
         server_tcpsocket->waitForReadyRead();
         server_tcpsocket->read(buf,1024);
         int count = atoi(buf);
-        qDebug()<<"cout "<<count;
+        //qDebug()<<"cout "<<count;
         for(int i=0;i<count;i++)
         {
-            qDebug()<<server_tcpsocket->waitForReadyRead(20);
+            server_tcpsocket->waitForReadyRead(20);
             server_tcpsocket->read(buf1,1024);
             server_tcpsocket->waitForReadyRead(20);
             server_tcpsocket->read(buf2,1024);
-            qDebug()<<buf1<<" "<<buf2;
+            //qDebug()<<buf1<<" "<<buf2;
             tlist->push_back(new Question(QString(buf2),QString(buf1)));
         }
     }
@@ -74,11 +74,57 @@ void Socket::GetSubjectList()
 }
 
 
-void Socket::getSubjectCase(QString num)
+void Socket::getSubjectCase(QString num, CaseList *caselist)
 {
     login();
-    server_tcpsocket->write("c");
+    server_tcpsocket->write("l");
+    QString introduce;
+    char buf[1024];
+    int count;
+    server_tcpsocket->waitForReadyRead(100);
+    server_tcpsocket->write(num.toStdString().data(),1024);
+    server_tcpsocket->waitForReadyRead(100);
+    while(server_tcpsocket->read(buf,1024)==1024)
+    {
+        introduce +=QString(buf);
+        server_tcpsocket->waitForReadyRead(100);
+    }
+    introduce +=QString(buf);
+    caselist->introduce = introduce;
+    server_tcpsocket->waitForReadyRead(100);
+    server_tcpsocket->read(buf,1024);
+    int total = QString(buf).toInt();
+    while(total)
+    {
+        QString getcase1,getcase2;
+        server_tcpsocket->waitForReadyRead(100);
+        while(server_tcpsocket->read(buf,1024)==1024)
+        {
+            getcase1 +=QString(buf);
+            server_tcpsocket->waitForReadyRead(100);
+        }
+        getcase1 +=QString(buf);
+        server_tcpsocket->write("m");
+        server_tcpsocket->flush();
+        qDebug()<<"receive case in:"<<QString(getcase1);
+        server_tcpsocket->waitForReadyRead(100);
+        while(server_tcpsocket->read(buf,1024)==1024)
+        {
+            getcase2 +=QString(buf);
+            server_tcpsocket->waitForReadyRead(100);
+        }
+        getcase2 +=QString(buf);
+        server_tcpsocket->write("m");
+        server_tcpsocket->flush();
+        qDebug()<<"receive case out:"<<QString(getcase2);
+        total-=2;
+        caselist->list->push_back(new _case(QString(getcase1),QString(getcase2)));
+    }
 
+    qDebug()<<introduce;
+    server_tcpsocket->write("e");
+    server_tcpsocket->flush();
+    server_tcpsocket->abort();
 }
 
 bool Socket::addSubject(AddSubject_s* addSubject_s)
@@ -114,12 +160,16 @@ bool Socket::addSubject(AddSubject_s* addSubject_s)
                 if(buf[0]=='r')
                 {
                     qDebug()<<"addsubject success";
+                    server_tcpsocket->write("e");
+                    server_tcpsocket->flush();
                     server_tcpsocket->abort();
                     return true;
                 }
                 else
                 {
                     qDebug()<<"server ERROR";
+                    server_tcpsocket->write("e");
+                    server_tcpsocket->flush();
                     server_tcpsocket->abort();
                     return false;
                 }
@@ -127,6 +177,8 @@ bool Socket::addSubject(AddSubject_s* addSubject_s)
             else
             {
                 qDebug()<<"server ERROR";
+                server_tcpsocket->write("e");
+                server_tcpsocket->flush();
                 server_tcpsocket->abort();
                 return false;
             }
@@ -134,6 +186,8 @@ bool Socket::addSubject(AddSubject_s* addSubject_s)
         else
         {
             qDebug()<<"server ERROR";
+            server_tcpsocket->write("e");
+            server_tcpsocket->flush();
             server_tcpsocket->abort();
             return false;
         }
@@ -141,10 +195,64 @@ bool Socket::addSubject(AddSubject_s* addSubject_s)
     else
     {
         qDebug()<<"server ERROR";
+        server_tcpsocket->write("e");
+        server_tcpsocket->flush();
         server_tcpsocket->abort();
         return false;
     }
 
+}
+
+bool Socket::addSubjectCase(CurrentTreeItem *currentTreeItem,QString input,QString output)
+{
+    login();
+    server_tcpsocket->write("t");
+    server_tcpsocket->flush();
+    server_tcpsocket->write(subject_list->at(currentTreeItem->parentRow)->list->at(currentTreeItem->row)->num.toStdString().data(),1024);
+    server_tcpsocket->waitForReadyRead();
+    char buf[1024];
+    server_tcpsocket->read(buf,1024);
+    if(buf[0]=='r')
+    {
+        server_tcpsocket->write(input.toStdString().data());
+        server_tcpsocket->flush();
+        server_tcpsocket->waitForReadyRead();
+        server_tcpsocket->read(buf,1024);
+        if(buf[0]=='r')
+        {
+            server_tcpsocket->write(output.toStdString().data());
+            server_tcpsocket->flush();
+            server_tcpsocket->waitForReadyRead();
+            server_tcpsocket->read(buf,1024);
+            if(buf[0]=='r'){
+                server_tcpsocket->write("e");
+                server_tcpsocket->flush();
+                server_tcpsocket->abort();
+                return true;
+                }
+            else {
+                qDebug()<<"serevr ERROR";
+                server_tcpsocket->write("e");
+                server_tcpsocket->flush();
+                server_tcpsocket->abort();
+                return false;
+            }
+        }
+        else{
+            qDebug()<<"serevr ERROR";
+            server_tcpsocket->write("e");
+            server_tcpsocket->flush();
+            server_tcpsocket->abort();
+            return false;
+        }
+    }
+    else{
+        qDebug()<<"serevr ERROR";
+        server_tcpsocket->write("e");
+        server_tcpsocket->flush();
+        server_tcpsocket->abort();
+        return false;
+    }
 }
 
 

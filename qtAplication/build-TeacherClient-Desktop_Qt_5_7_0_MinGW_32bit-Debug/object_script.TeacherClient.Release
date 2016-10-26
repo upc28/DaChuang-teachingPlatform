@@ -8,6 +8,7 @@ INPUT(
 ./release\socket.o
 ./release\myxml.o
 ./release\addsubject.o
+./release\addsubjectcase.o
 ./release\moc_widget.o
 ./release\moc_homeTab.o
 ./release\moc_studentTab.o
@@ -16,4 +17,5 @@ INPUT(
 ./release\moc_socket.o
 ./release\moc_myxml.o
 ./release\moc_addsubject.o
+./release\moc_addsubjectcase.o
 );
