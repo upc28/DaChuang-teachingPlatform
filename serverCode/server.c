@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 #include <fcntl.h>
 #include <mysql/mysql.h>
 #include <sys/stat.h>
@@ -42,6 +43,67 @@ int receiveFile(int accept_fd,char* filename)
   }
 }
 
+int sendFile(int accept_fd,char* filename)
+{
+  int fd,count;
+  printf("send filename:%s\n",filename );
+  if((fd=open(filename,O_RDONLY))==-1)
+  {
+    printf("openfile error:%s\n",filename);
+    return 0;
+  }
+  char buf[BUFSIZE];
+  while((count=read(fd,buf,BUFSIZE))==1024)
+  {
+    printf("read file:%s\n",buf );
+    write(accept_fd,buf,count);
+  }
+  printf("read file:%s\n",buf );
+  write(accept_fd,buf,count);
+  close(fd);
+  return 1;
+
+}
+
+int sendCase(int accept_fd,char* filename)
+{
+    DIR *dir;
+    struct dirent *ptr;
+    if((dir=opendir(filename))==NULL)
+    {
+      printf("open dir ERROR:%s\n",filename );
+      return 0;
+    }
+    int total = 0;
+    while((ptr=readdir(dir))!=NULL)
+    {
+      if(strcmp(ptr->d_name,".")==0 || strcmp(ptr->d_name,"..")==0)    ///current dir OR parrent dir
+              continue;
+      total++;
+    }
+    char buf[BUFSIZE];
+    sprintf(buf,"%d",total);
+    write(accept_fd,buf,BUFSIZE);
+
+    if((dir=opendir(filename))==NULL)
+    {
+      printf("open dir ERROR\n" );
+      return 0;
+    }
+
+    while((ptr=readdir(dir))!=NULL)
+    {
+      if(strcmp(ptr->d_name,".")==0 || strcmp(ptr->d_name,"..")==0)    ///current dir OR parrent dir
+              continue;
+      char buf[255];
+      sprintf(buf,"%s/%s",filename,ptr->d_name);
+      printf("send file :%s\n", buf);
+      if(sendFile(accept_fd,buf)==0)
+        return 0;
+      for(total = 0;total == 0;total=read(accept_fd,buf,BUFSIZE));
+    }
+}
+
 
 int main()
 {
@@ -50,7 +112,7 @@ int main()
     int field_num,field_count;
     const char* db = "source";
     mysql_init(&mysql);
-    if(mysql_real_connect(&mysql,"180.201.190.92","upc28","1996",NULL,0,NULL,0)==NULL)
+    if(mysql_real_connect(&mysql,"192.168.81.1","upc28","1996",NULL,0,NULL,0)==NULL)
     {
       printf("mysql connect errer! %d: %s\n",mysql_errno(&mysql),mysql_error(&mysql));
       exit(1);
@@ -192,7 +254,7 @@ int main()
                 break;
               case 'i':  //返回章节题目
 
-                for(size = 0;size == 0;size=read(accept_fd,buf1,2))  ;
+                for(size = 0;size == 0;size=read(accept_fd,buf1,BUFSIZE))  ;
 
                 sprintf(query,"select ID,TITLE from subject where CHAPTERID = %s",buf1);
                 printf("id = %s\n",buf1 );
@@ -214,24 +276,29 @@ int main()
                 break;
               case 't':   //上传测试用例
                 read(accept_fd,buf1,BUFSIZE);
-                sprintf(query,"update subject set case_count=case_count+1 where id = %s",buf1);
+                sprintf(query,"update subject set CASECOUNT=CASECOUNT+1 where id = %s",buf1);
                 printf("%s\n",query );
                 if(mysql_real_query(&mysql,query,strlen(query))!=0) printf("quer error\n");
-                sprintf(query,"select directory_dir,case_count from subject where id = %s",buf1);
+                sprintf(query,"select ID,CASECOUNT from subject where id = %s",buf1);
                 if(mysql_real_query(&mysql,query,strlen(query))!=0) printf("quer error\n");
                 res = mysql_store_result(&mysql);
                 if(res==NULL) printf("use result error\n");
                 row = mysql_fetch_row(res);
-                sprintf(buf2,"%s/case/%s.in",row[0],row[1]);
+                sprintf(buf2,"%s/%s/case/%s.in",DATAPATH,row[0],row[1]);
                 write(accept_fd,"r",1);
                 if(receiveFile(accept_fd,buf2)==1)
                 {
                   printf("write in success: %s\n",buf2 );
-                  write(accept_fd,"r",1);
-                  sprintf(buf2,"%s/case/%s.out",row[0],row[1]);
-                  if(receiveFile(accept_fd,buf2)==1) printf("write in success: %s\n",buf2 );
+                  write(accept_fd,"r",BUFSIZE);
+                  sprintf(buf2,"%s/%s/case/%s.out",DATAPATH,row[0],row[1]);
+                  if(receiveFile(accept_fd,buf2)==1)
+                  {
+                    printf("write in success: %s\n",buf2 );
+                    write(accept_fd,"r",BUFSIZE);
+                  }
+                  else write(accept_fd,"e",BUFSIZE);
                 }
-                else write(accept_fd,"e",1);
+                else write(accept_fd,"e",BUFSIZE);
                 mysql_free_result(res);
                 break;
               case 'n': //返回章节标题
@@ -253,8 +320,23 @@ int main()
                 mysql_free_result(res);
                 break;
               case 'l':  //return subject Introduce and CaseList
+                printf("goto l\n" );
                 read(accept_fd,buf1,BUFSIZE);
-
+                printf("recive id:%s\n", buf1);
+                sprintf(buf2,"%s/%s/describe",DATAPATH,buf1);
+                if(sendFile(accept_fd,buf2)==1)
+                {
+                  printf("send file success\n");
+                }
+                else {
+                  printf("send file fail\n");
+                }
+                sprintf(buf2,"%s/%s/case",DATAPATH,buf1);
+                if(sendCase(accept_fd,buf2)==1)
+                {
+                  printf("send case success\n");
+                }
+                else printf("send case fail\n");
                 break;
               case 'e':
                 close(accept_fd);
