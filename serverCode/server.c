@@ -35,7 +35,9 @@ int receiveFile(int accept_fd,char* filename)
   else{
     while (1) {
       count = read(accept_fd,buf,BUFSIZE);
-      write(fd,buf,count);
+      //ount = recv(accept_fd,buf,BUFSIZE,MSG_DONTWAIT);
+      send(fd,buf,count,0);
+      printf("receive file:%s\n",buf );
       if(count<BUFSIZE) break;
     }
     close(fd);
@@ -56,11 +58,11 @@ int sendFile(int accept_fd,char* filename)
   while((count=read(fd,buf,BUFSIZE))==1024)
   {
     printf("read file:%s\n",buf );
-    write(accept_fd,buf,count);
+    send(accept_fd,buf,count,0);
   }
-  printf("read file:%s\n",buf );
-  write(accept_fd,buf,count);
-  close(fd);
+  printf("read file %d:%s\n",count,buf );
+  send(accept_fd,buf,count,0);
+  //close(fd);
   return 1;
 
 }
@@ -83,7 +85,7 @@ int sendCase(int accept_fd,char* filename)
     }
     char buf[BUFSIZE];
     sprintf(buf,"%d",total);
-    write(accept_fd,buf,BUFSIZE);
+    send(accept_fd,buf,BUFSIZE,0);
 
     if((dir=opendir(filename))==NULL)
     {
@@ -100,6 +102,7 @@ int sendCase(int accept_fd,char* filename)
       printf("send file :%s\n", buf);
       if(sendFile(accept_fd,buf)==0)
         return 0;
+      recv(accept_fd,buf,1,MSG_WAITALL);
       for(total = 0;total == 0;total=read(accept_fd,buf,BUFSIZE));
     }
 }
@@ -144,7 +147,7 @@ int main()
     while(1)
     {
         int accept_fd = accept(server_fd,(struct sockaddr*)&csocket,&len);
-	       if(accept_fd!=-1) printf("receive connect\n");
+	    if(accept_fd!=-1) printf("receive connect\n");
         if(fork()==0)
         {
             printf("fork success\n");
@@ -153,8 +156,8 @@ int main()
             while(1){
             ssize_t size = 0;
             char ff;
-            for(size = 0;size == 0 ;size = read(accept_fd,&ff,1));
-
+            //for(size = 0;size == 0 ;size = read(accept_fd,&ff,1));
+            recv(accept_fd,&ff,1,MSG_WAITALL);
 	          printf("receive : %s\n",buf );
             char buf1[BUFSIZE],buf2[BUFSIZE],buf3[BUFSIZE];
             switch (ff) {
@@ -195,10 +198,12 @@ int main()
 
               case 'a':  //上传题目
                 //read(accept_fd,buf1,BUFSIZE); //chapter_id
-                for(size = 0;size == 0;size=read(accept_fd,buf1,BUFSIZE));
+                //for(size = 0;size == 0;size=read(accept_fd,buf1,BUFSIZE));
+                recv(accept_fd,buf1,BUFSIZE,MSG_WAITALL);
                 printf("receive chapter_id: %s\n", buf1);
                 //read(accept_fd,buf2,BUFSIZE); //title
-                for(size = 0;size == 0;size=read(accept_fd,buf2,BUFSIZE));
+                //for(size = 0;size == 0;size=read(accept_fd,buf2,BUFSIZE));
+                recv(accept_fd,buf2,BUFSIZE,MSG_WAITALL);
                 printf("receive title : %s\n",buf2 );
                 sprintf(query,"insert into subject (CHAPTERID,TITLE) values(%s,\'%s\')",buf1,buf2);
                 printf("%s\n",query );
