@@ -15,7 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QWidget>
 
@@ -29,7 +29,7 @@ public:
     QPushButton *deleteSubject_btn;
     QPushButton *subjectIntroduec_btn;
     QTreeWidget *subject_treeWidget;
-    QTableWidget *testCase_tableWidget;
+    QTableView *testCase_tableView;
     QPushButton *addCases_btn;
 
     void setupUi(QWidget *ManageTab)
@@ -55,22 +55,12 @@ public:
         subject_treeWidget->setFrameShape(QFrame::Box);
         subject_treeWidget->setFrameShadow(QFrame::Sunken);
         subject_treeWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        testCase_tableWidget = new QTableWidget(ManageTab);
-        if (testCase_tableWidget->columnCount() < 3)
-            testCase_tableWidget->setColumnCount(3);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        testCase_tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        testCase_tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        testCase_tableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
-        testCase_tableWidget->setObjectName(QStringLiteral("testCase_tableWidget"));
-        testCase_tableWidget->setGeometry(QRect(210, 70, 591, 291));
-        testCase_tableWidget->horizontalHeader()->setCascadingSectionResizes(false);
-        testCase_tableWidget->horizontalHeader()->setDefaultSectionSize(120);
-        testCase_tableWidget->verticalHeader()->setDefaultSectionSize(30);
-        testCase_tableWidget->verticalHeader()->setProperty("showSortIndicator", QVariant(false));
-        testCase_tableWidget->verticalHeader()->setStretchLastSection(false);
+        testCase_tableView = new QTableView(ManageTab);
+        testCase_tableView->setObjectName(QStringLiteral("testCase_tableView"));
+        testCase_tableView->setGeometry(QRect(210, 70, 591, 291));
+        testCase_tableView->horizontalHeader()->setHighlightSections(false);
+        testCase_tableView->horizontalHeader()->setMinimumSectionSize(120);
+        testCase_tableView->verticalHeader()->setMinimumSectionSize(30);
         addCases_btn = new QPushButton(ManageTab);
         addCases_btn->setObjectName(QStringLiteral("addCases_btn"));
         addCases_btn->setGeometry(QRect(210, 370, 141, 23));
@@ -89,12 +79,6 @@ public:
         subjectIntroduec_btn->setText(QApplication::translate("ManageTab", "\351\242\230\347\233\256\347\256\200\344\273\213", 0));
         QTreeWidgetItem *___qtreewidgetitem = subject_treeWidget->headerItem();
         ___qtreewidgetitem->setText(0, QApplication::translate("ManageTab", "\351\242\230\347\233\256\345\210\227\350\241\250", 0));
-        QTableWidgetItem *___qtablewidgetitem = testCase_tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("ManageTab", "\347\274\226\345\217\267", 0));
-        QTableWidgetItem *___qtablewidgetitem1 = testCase_tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("ManageTab", "\350\276\223\345\205\245", 0));
-        QTableWidgetItem *___qtablewidgetitem2 = testCase_tableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("ManageTab", "\346\234\237\345\276\205\350\276\223\345\207\272", 0));
         addCases_btn->setText(QApplication::translate("ManageTab", "\346\267\273\345\212\240\347\224\250\344\276\213", 0));
     } // retranslateUi
 

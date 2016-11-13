@@ -89,7 +89,7 @@
     </property>
    </column>
   </widget>
-  <widget class="QTableWidget" name="testCase_tableWidget">
+  <widget class="QTableView" name="testCase_tableView">
    <property name="geometry">
     <rect>
      <x>210</x>
@@ -98,36 +98,15 @@
      <height>291</height>
     </rect>
    </property>
-   <attribute name="horizontalHeaderCascadingSectionResizes">
+   <attribute name="horizontalHeaderHighlightSections">
     <bool>false</bool>
    </attribute>
-   <attribute name="horizontalHeaderDefaultSectionSize">
+   <attribute name="horizontalHeaderMinimumSectionSize">
     <number>120</number>
    </attribute>
-   <attribute name="verticalHeaderDefaultSectionSize">
+   <attribute name="verticalHeaderMinimumSectionSize">
     <number>30</number>
    </attribute>
-   <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-    <bool>false</bool>
-   </attribute>
-   <attribute name="verticalHeaderStretchLastSection">
-    <bool>false</bool>
-   </attribute>
-   <column>
-    <property name="text">
-     <string>编号</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>输入</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>期待输出</string>
-    </property>
-   </column>
   </widget>
   <widget class="QPushButton" name="addCases_btn">
    <property name="geometry">

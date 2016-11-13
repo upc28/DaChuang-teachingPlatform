@@ -2,6 +2,9 @@
 #include "ui_manageTab.h"
 #include "qtreewidget.h"
 #include "qstringlist.h"
+#include "QTableWidgetItem"
+#include "QStandardItemModel"
+#include "qabstractitemview.h"
 
 ManageTab::ManageTab(Socket *s) :
     ui(new Ui::ManageTab)
@@ -34,6 +37,26 @@ void ManageTab::RefreshTree()
 
 }
 
+void ManageTab::RefreshCaseList(QList<_case*> *list)
+{
+    QTableView* tableview = ui->testCase_tableView;
+    QStandardItemModel *caseModel = new QStandardItemModel();
+    caseModel->setHorizontalHeaderItem(0,new QStandardItem("输入"));
+    caseModel->setHorizontalHeaderItem(1,new QStandardItem("输出"));
+    tableview->setModel(caseModel);
+    tableview->setSelectionBehavior(QAbstractItemView::SelectRows);
+    tableview->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    tableview->setColumnWidth(0,270);
+    tableview->setColumnWidth(1,270);
+
+    for(int i=0;i<list->count();i++)
+    {
+
+        caseModel->setItem(i,0,new QStandardItem(list->at(i)->input));
+        caseModel->setItem(i,1,new QStandardItem(list->at(i)->output));
+    }
+}
+
 ManageTab::~ManageTab()
 {
     delete ui;
@@ -49,12 +72,13 @@ void ManageTab::on_subject_treeWidget_doubleClicked(const QModelIndex &index)
     CaseList *caselist = new CaseList();
     serverSocket->getSubjectCase(serverSocket->subject_list->at(index.parent().row())->list->at(index.row())->num,caselist);
     //qDebug()<<(serverSocket->subject_list->at(index.parent().row())->list->at(index.row())->num);
-
+    RefreshCaseList(caselist->list);
 
 }
 
 void ManageTab::on_addSubject_btn_clicked()
 {
+
     addsubject = new AddSubject(serverSocket);
     addsubject->show();
 
@@ -72,6 +96,7 @@ void ManageTab::on_addCases_btn_clicked()
         return;
     addsubjectcase = new AddSubjectCase(serverSocket,currentTreeItem);
     addsubjectcase->show();
+
 }
 
 

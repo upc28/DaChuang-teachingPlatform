@@ -37,6 +37,7 @@ private:
     AddSubject* addsubject;
     AddSubjectCase* addsubjectcase;
     CurrentTreeItem *currentTreeItem;
+    void RefreshCaseList(QList<_case *> *list);
 };
 
 #endif // MANAGETAB_H
