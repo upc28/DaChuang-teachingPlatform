@@ -205,6 +205,7 @@ Makefile: ../TeacherClient/TeacherClient.pro H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspec
 		H:/Qt/Qt5.7.0/5.7/mingw53_32/lib/Qt5Widgets.prl \
 		H:/Qt/Qt5.7.0/5.7/mingw53_32/lib/Qt5Gui.prl \
 		H:/Qt/Qt5.7.0/5.7/mingw53_32/lib/Qt5Network.prl \
+		H:/Qt/Qt5.7.0/5.7/mingw53_32/lib/Qt5Sql.prl \
 		H:/Qt/Qt5.7.0/5.7/mingw53_32/lib/Qt5Core.prl
 	$(QMAKE) -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ..\TeacherClient\TeacherClient.pro
 H:/Qt/Qt5.7.0/5.7/mingw53_32/mkspecs/features/spec_pre.prf:
@@ -353,6 +354,7 @@ H:/Qt/Qt5.7.0/5.7/mingw53_32/lib/qtmaind.prl:
 H:/Qt/Qt5.7.0/5.7/mingw53_32/lib/Qt5Widgets.prl:
 H:/Qt/Qt5.7.0/5.7/mingw53_32/lib/Qt5Gui.prl:
 H:/Qt/Qt5.7.0/5.7/mingw53_32/lib/Qt5Network.prl:
+H:/Qt/Qt5.7.0/5.7/mingw53_32/lib/Qt5Sql.prl:
 H:/Qt/Qt5.7.0/5.7/mingw53_32/lib/Qt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ..\TeacherClient\TeacherClient.pro

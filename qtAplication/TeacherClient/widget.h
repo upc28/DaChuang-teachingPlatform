@@ -8,6 +8,8 @@
 #include "manageTab.h"
 #include "statusTab.h"
 #include "socket.h"
+#include "QtSql/QSqlDatabase"
+#include "QtSql/QSqlQuery"
 
 namespace Ui {
 class Widget;

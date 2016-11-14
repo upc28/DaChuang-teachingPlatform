@@ -9,6 +9,7 @@ INPUT(
 ./debug\myxml.o
 ./debug\addsubject.o
 ./debug\addsubjectcase.o
+./debug\sqlbases.o
 ./debug\moc_widget.o
 ./debug\moc_homeTab.o
 ./debug\moc_studentTab.o

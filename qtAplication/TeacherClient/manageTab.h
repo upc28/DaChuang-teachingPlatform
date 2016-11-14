@@ -5,6 +5,7 @@
 #include "socket.h"
 #include "addsubject.h"
 #include "addsubjectcase.h"
+#include "sqlbases.h"
 
 namespace Ui {
 class ManageTab;

@@ -9,6 +9,7 @@ INPUT(
 ./release\myxml.o
 ./release\addsubject.o
 ./release\addsubjectcase.o
+./release\sqlbases.o
 ./release\moc_widget.o
 ./release\moc_homeTab.o
 ./release\moc_studentTab.o

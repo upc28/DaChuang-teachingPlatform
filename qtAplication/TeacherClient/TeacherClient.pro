@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT       += network
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,7 +23,8 @@ SOURCES += main.cpp\
     socket.cpp \
     myxml.cpp \
     addsubject.cpp \
-    addsubjectcase.cpp
+    addsubjectcase.cpp \
+    sqlbases.cpp
 
 HEADERS  += widget.h \
     homeTab.h \
@@ -32,7 +34,9 @@ HEADERS  += widget.h \
     socket.h \
     myxml.h \
     addsubject.h \
-    addsubjectcase.h
+    addsubjectcase.h \
+    sqlbases.h \
+    bases.h
 
 FORMS    += widget.ui \
     homeTab.ui \

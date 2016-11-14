@@ -1,6 +1,7 @@
 #include "addsubject.h"
 #include "ui_addsubject.h"
 #include "QMessageBox"
+#include "sqlbases.h"
 
 AddSubject::AddSubject(Socket *s) :
     ui(new Ui::AddSubject)
@@ -20,7 +21,7 @@ AddSubject::~AddSubject()
 
 void AddSubject::on_Btn_add_clicked()
 {
-    if(serverSocket->addSubject(new AddSubject_s(ui->comBox->currentData().toString(),ui->lineEdit->text(),ui->textEdit->toPlainText(),ui->textEdit_pre->toPlainText(),ui->textEdit_suf->toPlainText())))
+    if(SqlBases::addSubject(new _Subject(ui->lineEdit->text(),ui->textEdit->toPlainText(),ui->textEdit_pre->toPlainText(),ui->textEdit_suf->toPlainText(),"1")))
     {
         QMessageBox::about(this,"Success","添加题目成功");
     }
