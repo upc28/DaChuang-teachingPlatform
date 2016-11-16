@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include "socket.h"
+#include "manageTab.h"
+#include "bases.h"
 
 namespace Ui {
 class AddSubject;
@@ -13,7 +15,7 @@ class AddSubject : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddSubject(Socket* s);
+    explicit AddSubject(QList<SubjectList*> *l);
     ~AddSubject();
 
 private slots:
@@ -22,6 +24,8 @@ private slots:
 private:
     Ui::AddSubject *ui;
     Socket* serverSocket;
+
+    QList<SubjectList*> *list;
 };
 
 #endif // ADDSUBJECT_H

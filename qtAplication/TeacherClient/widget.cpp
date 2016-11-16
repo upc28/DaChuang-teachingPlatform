@@ -11,17 +11,8 @@ Widget::Widget(QWidget *parent) :
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("GBK"));
 
     //QTextCodec::setCodecForCStrings(QTextCodec::codecForName("GBK"));
-    Socket *ss= new Socket();
-    homeTab = new HomeTab(ss);
-    studentTab = new StudentTab();
-    manageTab = new ManageTab(ss);
-    statusTab = new StatusTab(ss);
-    ui->TabWidget->addTab(homeTab,"Home");
-    ui->TabWidget->addTab(studentTab,"Student");
-    ui->TabWidget->addTab(manageTab,"Manage");
-    ui->TabWidget->addTab(statusTab,"Status");
     QSqlDatabase database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setDatabaseName("source");
+    database.setDatabaseName("source2");
     database.setUserName("root");
     database.setPassword("");
     if(!database.open())
@@ -31,6 +22,16 @@ Widget::Widget(QWidget *parent) :
     else qDebug()<<database.databaseName();
     QSqlQuery query;
     query.exec("show tables");
+    Socket *ss= new Socket();
+    homeTab = new HomeTab(ss);
+    studentTab = new StudentTab();
+    manageTab = new ManageTab(ss);
+    statusTab = new StatusTab(ss);
+    ui->TabWidget->addTab(homeTab,"Home");
+    ui->TabWidget->addTab(studentTab,"Student");
+    ui->TabWidget->addTab(manageTab,"Manage");
+    ui->TabWidget->addTab(statusTab,"Status");
+
 
 
 }

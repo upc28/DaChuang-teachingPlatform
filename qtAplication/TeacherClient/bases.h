@@ -4,11 +4,11 @@
 #include "qstring.h"
 
 struct _Subject{
-    QString introduce,precode,sufcode,chapterid,title;
+    QString introduce,precode,sufcode,id,title;
 
-    _Subject(QString _title,QString _introduce,QString _precode,QString _sufcode,QString _chapterid)
+    _Subject(QString _title,QString _introduce,QString _precode,QString _sufcode,QString _id)
     {
-        title = _title,introduce = _introduce,precode = _precode,sufcode = _sufcode,chapterid = _chapterid;
+        title = _title,introduce = _introduce,precode = _precode,sufcode = _sufcode,id = _id;
     }
 };
 struct _Case{
@@ -33,6 +33,16 @@ struct _CompileRes{
     _CompileRes(QString _res)
     {
         res = _res;
+    }
+};
+
+struct SubjectList{
+    QString title,id;
+    QList<_Subject*> *list;
+    SubjectList(QString _title,QString _id)
+    {
+        title = _title,id = _id;
+        list = new QList<_Subject*>();
     }
 };
 

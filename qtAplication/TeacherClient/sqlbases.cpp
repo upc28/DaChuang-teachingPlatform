@@ -9,8 +9,8 @@ bool SqlBases::addSubject(_Subject *subject)
 {
    // query.exec("insert");
     QSqlQuery query;
-    qDebug()<<"insert into Subject (TITLE,INTRODUCE,PRECODE,SUFCODE,CHAPTERID) values(\'"+subject->title+"\',\'"+subject->introduce+"\',\'"+subject->precode+"\',\'"+subject->sufcode+"\',"+subject->chapterid+')';
-    if(query.exec("insert into Subject (TITLE,INTRODUCE,PRECODE,SUFCODE,CHAPTERID) values(\'"+subject->title.toUtf8()+"\',\'"+subject->introduce+"\',\'"+subject->precode+"\',\'"+subject->sufcode+"\',"+subject->chapterid+')'))
+    qDebug()<<"insert into Subject (TITLE,INTRODUCE,PRECODE,SUFCODE,CHAPTERID) values(\'"+subject->title+"\',\'"+subject->introduce+"\',\'"+subject->precode+"\',\'"+subject->sufcode+"\',"+subject->id+')';
+    if(query.exec("insert into Subject (TITLE,INTRODUCE,PRECODE,SUFCODE,CHAPTERID) values(\'"+subject->title.toUtf8()+"\',\'"+subject->introduce+"\',\'"+subject->precode+"\',\'"+subject->sufcode+"\',"+subject->id+')'))
     //if(query.exec("insert into Subject (TITLE,CHAPTERID) values(\'"+subject->title.toStdString()+"\',"+subject->chapterid+')'))
     {
         qDebug()<<"addSubject success";
@@ -27,10 +27,9 @@ bool SqlBases::addSubject(_Subject *subject)
 bool SqlBases::addSubjectCase(_Case* cases)
 {
     QSqlQuery query;
-    query.exec("insert into Scase (INPUT,OUTPUT,SUBJECTID) values("+cases->input+','+cases->output
-                +','+cases->subjectid+')');
-    if(query.exec("insert into Scase (INPUT,OUTPUT,SUBJECTID) values("+cases->input+','+cases->output
-                  +','+cases->subjectid+')'))
+
+    if(query.exec("insert into Scase (INPUT,OUTPUT,SUBJECTID) values(\'"+cases->input+"\',\'"+cases->output
+                  +"\',"+cases->subjectid+')'))
     {
         qDebug()<<"addSubjectCase success";
         return true;
@@ -100,6 +99,62 @@ QString SqlBases::reCompileRes(QString compileID)
     }
     else qDebug()<<"Error queryCompileRes :"<<query.lastError().text();
     return NULL;
+}
+
+QList<QVariant> SqlBases::reChapter()
+{
+    QSqlQuery query;
+    QList<QVariant> list;
+    if(query.exec("select ID,TITLE from Chapter"))
+    {
+        qDebug()<<"queryCompileRes success";
+
+        while(query.next())
+        {
+            list.push_back(query.value(0));
+            list.push_back(query.value(1));
+            qDebug()<<query.value(0)<<query.value(1);
+        }
+
+    }
+    else qDebug()<<"Error queryCompileRes :"<<query.lastError().text();
+    return list;
+}
+
+bool SqlBases::reSubject(QList<SubjectList *> *list)
+{
+    QSqlQuery query;
+    if(query.exec("select ID,TITLE from Chapter"))
+    {
+        qDebug()<<"1/2:queryChapter success";
+
+        while(query.next())
+        {
+            list->push_back(new SubjectList(query.value(1).toString(),query.value(0).toString()));
+            qDebug()<<query.value(0)<<query.value(1);
+        }
+    }
+    else {
+        qDebug()<<"1/2:Error queryChapter :"<<query.lastError().text();
+        return false;
+    }
+    for(int i=0;i<list->count();i++)
+    {
+        if(query.exec("select ID,TITLE,INTRODUCE,PRECODE,SUFCODE from Subject where CHAPTERID = "+list->at(i)->id))
+        {
+            qDebug()<<"2/2:querySubject success";
+
+            while(query.next())
+            {
+                list->at(i)->list->push_back(new _Subject(query.value(1).toString(),query.value(2).toString(),query.value(3).toString(),query.value(4).toString(),query.value(0).toString()));
+                //qDebug()<<query.value(0)<<query.value(1);
+            }
+        }
+        else{
+            qDebug()<<"2/2:Error querySubject :"<<query.lastError().text();
+            return false;
+        }
+    }
 }
 
 

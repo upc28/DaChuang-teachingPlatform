@@ -16,15 +16,17 @@ public:
     static bool deleteSubject(QString subjectid);
     static bool deleteSubjectCase(QString caseid);
 
-    static void reSubject();
-    static void reSubjectCase(QString subjectid);
+    static QList<QVariant> reChapter();
+    static bool reSubject(QList<SubjectList*> *list);
+    static bool reSubjectCase(QString subjectid);
 
     static QString pushCode(_Code* code);
     static QString reCompileRes(QString compileID);
 
-    QList<QVariant> *list;
+
 private:
     //static QSqlQuery query;
+    static QList<QVariant> llist;
 
 };
 

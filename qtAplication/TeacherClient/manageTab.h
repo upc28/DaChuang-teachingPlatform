@@ -6,10 +6,12 @@
 #include "addsubject.h"
 #include "addsubjectcase.h"
 #include "sqlbases.h"
+#include "bases.h"
 
 namespace Ui {
 class ManageTab;
 }
+
 
 
 
@@ -35,10 +37,13 @@ private slots:
 private:
     Ui::ManageTab *ui;
     Socket* serverSocket;
-    AddSubject* addsubject;
+    //AddSubject* addsubject;
     AddSubjectCase* addsubjectcase;
     CurrentTreeItem *currentTreeItem;
     void RefreshCaseList(QList<_case *> *list);
+
+
+    QList<SubjectList*> *subjectList;
 };
 
 #endif // MANAGETAB_H

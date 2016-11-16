@@ -13,6 +13,9 @@ ManageTab::ManageTab(Socket *s) :
     currentTreeItem = new CurrentTreeItem();
     serverSocket = s;
     connect(serverSocket,SIGNAL(refreshSubjectFinish()),this,SLOT(RefreshTree()));
+
+    subjectList = new QList<SubjectList*>();
+    SqlBases::reSubject(subjectList);
 }
 
 void ManageTab::RefreshTree()
@@ -74,13 +77,14 @@ void ManageTab::on_subject_treeWidget_doubleClicked(const QModelIndex &index)
     //qDebug()<<(serverSocket->subject_list->at(index.parent().row())->list->at(index.row())->num);
     RefreshCaseList(caselist->list);
 
+
 }
 
 void ManageTab::on_addSubject_btn_clicked()
 {
 
-    addsubject = new AddSubject(serverSocket);
-    addsubject->show();
+    //addsubject = new AddSubject(subjectList);
+    //addsubject->show();
 
 }
 
@@ -94,7 +98,7 @@ void ManageTab::on_addCases_btn_clicked()
 {
     if(currentTreeItem->parentRow==-1&&currentTreeItem->row==-1)
         return;
-    addsubjectcase = new AddSubjectCase(serverSocket,currentTreeItem);
+    //addsubjectcase = new AddSubjectCase(subjectList,currentTreeItem);
     addsubjectcase->show();
 
 }
