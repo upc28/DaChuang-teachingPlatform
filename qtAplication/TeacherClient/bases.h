@@ -12,11 +12,11 @@ struct _Subject{
     }
 };
 struct _Case{
-    QString subjectid,input,output;
+    QString id,input,output;
 
-    _Case(QString _input,QString _output,QString _subjectid)
+    _Case(QString _input,QString _output,QString _id)
     {
-        input = _input,output = _output,subjectid = _subjectid;
+        input = _input,output = _output,id = _id;
     }
 };
 

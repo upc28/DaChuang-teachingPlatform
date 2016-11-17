@@ -27,9 +27,10 @@ bool SqlBases::addSubject(_Subject *subject)
 bool SqlBases::addSubjectCase(_Case* cases)
 {
     QSqlQuery query;
-
-    if(query.exec("insert into Scase (INPUT,OUTPUT,SUBJECTID) values(\'"+cases->input+"\',\'"+cases->output
-                  +"\',"+cases->subjectid+')'))
+    qDebug()<<"insert into Scase (INPUT,OUTPUT,SUBJECTID) values('"+cases->input+"','"+cases->output
+              +"',"+cases->id+")";
+    if(query.exec("insert into Scase (INPUT,OUTPUT,SUBJECTID) values('"+cases->input+"','"+cases->output
+                  +"',"+cases->id+")"))
     {
         qDebug()<<"addSubjectCase success";
         return true;
@@ -123,6 +124,7 @@ QList<QVariant> SqlBases::reChapter()
 
 bool SqlBases::reSubject(QList<SubjectList *> *list)
 {
+    list->clear();
     QSqlQuery query;
     if(query.exec("select ID,TITLE from Chapter"))
     {
@@ -156,6 +158,28 @@ bool SqlBases::reSubject(QList<SubjectList *> *list)
         }
     }
 }
+
+bool SqlBases::reSubjectCase(QString subjectid,QList<_Case*> *list)
+{
+    list->clear();
+    QSqlQuery query;
+    if(query.exec("select ID,INPUT,OUTPUT from Scase where SUBJECTID = "+subjectid))
+    {
+        qDebug()<<"queryCase success";
+        while(query.next())
+        {
+            list->push_back(new _Case(query.value(1).toString(),query.value(2).toString(),query.value(0).toString()));
+            //qDebug()<<query.value(0)<<query.value(1);
+        }
+        return true;
+    }
+    else{
+        qDebug()<<"Error queryCase :"<<query.lastError().text();
+        return false;
+    }
+}
+
+
 
 
 

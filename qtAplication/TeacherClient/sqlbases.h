@@ -18,7 +18,7 @@ public:
 
     static QList<QVariant> reChapter();
     static bool reSubject(QList<SubjectList*> *list);
-    static bool reSubjectCase(QString subjectid);
+    static bool reSubjectCase(QString subjectid, QList<_Case *> *list);
 
     static QString pushCode(_Code* code);
     static QString reCompileRes(QString compileID);

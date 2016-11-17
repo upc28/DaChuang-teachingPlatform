@@ -34,16 +34,19 @@ private slots:
 
     void on_addCases_btn_clicked();
 
+    void on_deleteCases_btn_clicked();
+
 private:
     Ui::ManageTab *ui;
     Socket* serverSocket;
     //AddSubject* addsubject;
     AddSubjectCase* addsubjectcase;
     CurrentTreeItem *currentTreeItem;
-    void RefreshCaseList(QList<_case *> *list);
+    void RefreshCaseList();
 
 
     QList<SubjectList*> *subjectList;
+    QList<_Case*> *caseList;
 };
 
 #endif // MANAGETAB_H

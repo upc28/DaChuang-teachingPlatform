@@ -13,7 +13,7 @@ class AddSubjectCase : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddSubjectCase(Socket *s, CurrentTreeItem *curItem);
+    explicit AddSubjectCase(QString subjectid);
     ~AddSubjectCase();
 
 private slots:
@@ -21,8 +21,7 @@ private slots:
 
 private:
     Ui::AddSubjectCase *ui;
-    Socket *serverSocket;
-    CurrentTreeItem *currenttreeItem;
+    QString sId;
 };
 
 #endif // ADDSUBJECTCASE_H

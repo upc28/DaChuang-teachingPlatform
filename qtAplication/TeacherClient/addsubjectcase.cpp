@@ -3,12 +3,11 @@
 #include "QMessageBox"
 #include "sqlbases.h"
 
-AddSubjectCase::AddSubjectCase(Socket *s, CurrentTreeItem *curItem) :
+AddSubjectCase::AddSubjectCase(QString subjectid) :
     ui(new Ui::AddSubjectCase)
 {
     ui->setupUi(this);
-    serverSocket = s;
-    currenttreeItem = curItem;
+    sId = subjectid;
 }
 
 AddSubjectCase::~AddSubjectCase()
@@ -18,7 +17,7 @@ AddSubjectCase::~AddSubjectCase()
 
 void AddSubjectCase::on_pushButton_clicked()
 {
-    if(SqlBases::addSubjectCase(new _Case(ui->textEdit->toPlainText(),ui->textEdit_2->toPlainText(),"1")))
+    if(SqlBases::addSubjectCase(new _Case(ui->textEdit->toPlainText(),ui->textEdit_2->toPlainText(),sId)))
     {
         QMessageBox::about(this,"Success","添加测试用例成功");
     }
