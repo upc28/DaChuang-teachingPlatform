@@ -2,12 +2,12 @@
 #include "ui_statusTab.h"
 #include "qcombobox.h"
 
-StatusTab::StatusTab(Socket *s) :
+StatusTab::StatusTab() :
     ui(new Ui::StatusTab)
 {
     ui->setupUi(this);
-    serverSocket = s;
-    connect(serverSocket,SIGNAL(refreshSubjectFinish()),this,SLOT(refreshTitleBox()));
+
+
 }
 
 void StatusTab::refreshTitleBox()

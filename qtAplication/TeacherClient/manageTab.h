@@ -20,7 +20,7 @@ class ManageTab : public QWidget
     Q_OBJECT
 
 public:
-    explicit ManageTab(Socket *s);
+    explicit ManageTab();
     ~ManageTab();
 
 private slots:

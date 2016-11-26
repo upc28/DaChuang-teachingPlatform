@@ -13,7 +13,7 @@ class HomeTab : public QWidget
     Q_OBJECT
 
 public:
-    explicit HomeTab(Socket *s);
+    explicit HomeTab();
 
     ~HomeTab();
 

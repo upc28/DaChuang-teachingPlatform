@@ -7,13 +7,13 @@
 #include "qabstractitemview.h"
 #include "qmessagebox.h"
 
-ManageTab::ManageTab(Socket *s) :
+ManageTab::ManageTab() :
     ui(new Ui::ManageTab)
 {
     ui->setupUi(this);
     currentTreeItem = new CurrentTreeItem();
-    serverSocket = s;
-    connect(serverSocket,SIGNAL(refreshSubjectFinish()),this,SLOT(RefreshTree()));
+
+
 
     subjectList = new QList<SubjectList*>();
     caseList = new QList<_Case*>();

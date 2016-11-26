@@ -22,11 +22,11 @@ Widget::Widget(QWidget *parent) :
     else qDebug()<<database.databaseName();
     QSqlQuery query;
     query.exec("show tables");
-    Socket *ss= new Socket();
-    homeTab = new HomeTab(ss);
+
+    homeTab = new HomeTab();
     studentTab = new StudentTab();
-    manageTab = new ManageTab(ss);
-    statusTab = new StatusTab(ss);
+    manageTab = new ManageTab();
+    statusTab = new StatusTab();
     ui->TabWidget->addTab(homeTab,"Home");
     ui->TabWidget->addTab(studentTab,"Student");
     ui->TabWidget->addTab(manageTab,"Manage");

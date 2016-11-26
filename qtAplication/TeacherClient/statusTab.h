@@ -13,7 +13,7 @@ class StatusTab : public QWidget
     Q_OBJECT
 
 public:
-    explicit StatusTab(Socket *s);
+    explicit StatusTab();
     ~StatusTab();
 
 private slots:
